@@ -41,7 +41,7 @@ points = 0
 def clear_terminal(): # 🤤
     os.system(platform.system() == "Windows" and "cls" or "clear")
 
-def ask_question(question, options: {str: bool}):
+def ask_question(question, options: dict[str: bool]):
     clear_terminal()
     
     formatted_options = ""
@@ -54,7 +54,7 @@ def ask_question(question, options: {str: bool}):
     print("The question is:", question)
     print("Is it:\n" + formatted_options)
 
-def handle_answer(question, options: {str: bool}):
+def handle_answer(question, options: dict[str: bool]):
     global points
     answer = input("answer number: ")
     
