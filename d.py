@@ -64,11 +64,13 @@ def handle_answer(question, options: dict[str: bool]):
             print("invalid option.")
             return
         selected_option = list(options.keys())[answer_indice]
+        
+        clear_terminal()
         if options[selected_option]:
-            print("correct! + 10 points.\n")
+            print("correct! + 10 points.")
             points += 10
         else:
-            print(f"wrong. -5 points\n")
+            print(f"wrong. -5 points")
             points -= 5
 
     except ValueError:
@@ -84,17 +86,27 @@ def main():
     print("\nwelcome to my bkacup quiz game")
     print(f"\033[93m" + "\n<!> reminder that all questions were written with ai <!>\n" + "\033[0m")
 
+    time.sleep(3)  # pause for a second to let the user read the welcome message
+
     for question in questions:
         options = questions[question]
         ask_question(question, options)
         handle_answer(question, options)
+
+
+    clear_terminal()
 
     print(f"you scored {points} points out of {len(questions) * 10} possible points.\n")
     reply = input("would you like to play again? (y/n): ").strip().lower()
     if reply == 'y' or reply == 'yes':
         points = 0
         main()
+    elif reply == 'n' or reply == 'no':
+        clear_terminal()
     else:
-        print("thanks for playing! goodbye.")
+        print("invalid input, exiting the game.")
+        return
+    
+    print("thanks for playing! goodbye.")
 
 main()
